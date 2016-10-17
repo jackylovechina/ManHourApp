@@ -62,8 +62,8 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DatePickerFragment datePickerFragment=new DatePickerFragment();
+                datePickerFragment.show(getActivity().getFragmentManager(),"");
             }
         });
 

@@ -12,7 +12,10 @@
     <FrameLayout
         android:id="@+id/fl_main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rg_main_check">
+
+    </FrameLayout>
 
     <RadioGroup
         android:id="@+id/rg_main_check"
@@ -31,20 +34,20 @@
             android:checked="true"
             android:drawableTop="@drawable/bottom_bar_img_selector"
             android:gravity="center"
-            android:textColor="@color/bottom_bar_text_selector"
-            android:text="未完成" />
+            android:text="未完成"
+            android:textColor="@color/bottom_bar_text_selector" />
 
         <RadioButton
-            android:checked="false"
             android:id="@+id/rb_main_check_comp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:checked="false"
             android:drawableTop="@drawable/bottom_bar_img_selector"
             android:gravity="center"
-            android:textColor="@color/bottom_bar_text_selector"
-            android:text=" 已完成" />
+            android:text=" 已完成"
+            android:textColor="@color/bottom_bar_text_selector" />
     </RadioGroup>
 
 </RelativeLayout>
