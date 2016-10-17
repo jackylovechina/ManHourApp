@@ -4,6 +4,8 @@ package com.shg.manhourapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -37,6 +39,8 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView mCompDispatchListView;
 
+    private FloatingActionButton fab;
+
     private List<DispatchListBean> mCompDispatchLists;
     private HttpManager httpManager;
     private RequestParams params;
@@ -53,6 +57,15 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
         View view = inflater.inflate(R.layout.fragment_compdisplist, container, false);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_comp_dropRefresh);
         mCompDispatchListView = (ListView) view.findViewById(R.id.lv_comp_dispatchlistview);
+
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,

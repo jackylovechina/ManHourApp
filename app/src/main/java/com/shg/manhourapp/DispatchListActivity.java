@@ -36,16 +36,6 @@ public class DispatchListActivity extends AppCompatActivity implements RadioGrou
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         mRadioGroup = (RadioGroup) findViewById(R.id.rg_main_check);
         mRadioGroup.setOnCheckedChangeListener(this);
         mFragmentManager = getSupportFragmentManager();
