@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,10 +34,15 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UnCompDispListFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class UnCompDispListFragment extends Fragment implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView mUnCompDispatchListView;
+
     private List<DispatchListBean> mUnCompDispatchLists;
+
+    private HttpManager httpManager;
+    private RequestParams params;
 
 
     public UnCompDispListFragment() {
@@ -49,7 +55,13 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_uncompdisplist, container, false);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_uncomp_dropRefresh);
         mUnCompDispatchListView = (ListView) view.findViewById(R.id.lv_uncomp_dispatchlistview);
+
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
         return view;
     }
 
@@ -57,12 +69,35 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        HttpManager httpManager = x.http();
+        httpManager = x.http();
         String url = ServerApi.Address;
         String order = ServerApi.GET_NOCOMPLETE;
 
-        RequestParams params = new RequestParams(url + order);
+        params = new RequestParams(url + order);
         params.addParameter("employeeID", "E23DA3DF-A7E5-48EA-BF3D-7FDF76DA511E");
+
+        onRefresh();
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        List<DispatchListItemsViewModel> dispatchListItemsViewModels = new ArrayList<>();
+        dispatchListItemsViewModels = mUnCompDispatchLists.get(position).DispatchListItemsViewModel;
+
+        Intent intent = new Intent();
+        intent.putExtra("mDispatchListItems", (Serializable) mUnCompDispatchLists.get(position));
+        intent.putExtra("isComp", 1);
+        intent.setClass(getActivity(), DispatchItemsActivity.class);
+        startActivity(intent);
+
+
+    }
+
+    @Override
+    public void onRefresh() {
+
 
         httpManager.get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -90,22 +125,10 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
             @Override
             public void onFinished() {
 
+                mSwipeRefreshLayout.setRefreshing(false);
+
             }
         });
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        List<DispatchListItemsViewModel> dispatchListItemsViewModels = new ArrayList<>();
-        dispatchListItemsViewModels = mUnCompDispatchLists.get(position).DispatchListItemsViewModel;
-
-        Intent intent = new Intent();
-        intent.putExtra("mDispatchListItems", (Serializable) mUnCompDispatchLists.get(position));
-        intent.putExtra("isComp",1);
-        intent.setClass(getActivity(), DispatchItemsActivity.class);
-        startActivity(intent);
-
 
     }
 }

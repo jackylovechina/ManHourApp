@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompDispListFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class CompDispListFragment extends Fragment implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ListView mCompDispatchListView;
+
     private List<DispatchListBean> mCompDispatchLists;
+    private HttpManager httpManager;
+    private RequestParams params;
 
     public CompDispListFragment() {
         // Required empty public constructor
@@ -45,7 +51,13 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_compdisplist, container, false);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_comp_dropRefresh);
         mCompDispatchListView = (ListView) view.findViewById(R.id.lv_comp_dispatchlistview);
+
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
         return view;
     }
 
@@ -53,14 +65,32 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        HttpManager httpManager = x.http();
+        httpManager = x.http();
         String url = ServerApi.Address;
         String order = ServerApi.GET_COMPLETE;
 
 
-        RequestParams params = new RequestParams(url + order);
+        params = new RequestParams(url + order);
         params.addParameter("employeeID", "E23DA3DF-A7E5-48EA-BF3D-7FDF76DA511E");
 
+        onRefresh();
+
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Intent intent = new Intent();
+        intent.putExtra("mDispatchListItems", (Serializable) mCompDispatchLists.get(position));
+        intent.putExtra("isComp", 2);
+        intent.setClass(getActivity(), DispatchItemsActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onRefresh() {
         httpManager.get(params, new Callback.CommonCallback<String>() {
 
             @Override
@@ -71,9 +101,8 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
                 mCompDispatchLists = gson.fromJson(result, new TypeToken<List<DispatchListBean>>() {
                 }.getType());
 
-                mCompDispatchListView.setAdapter(new DispatchListAdapter(mCompDispatchLists,2));
+                mCompDispatchListView.setAdapter(new DispatchListAdapter(mCompDispatchLists, 2));
                 mCompDispatchListView.setOnItemClickListener(CompDispListFragment.this);
-
 
 
             }
@@ -91,18 +120,11 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
             @Override
             public void onFinished() {
 
+                mSwipeRefreshLayout.setRefreshing(false);
+
             }
         });
-    }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        Intent intent = new Intent();
-        intent.putExtra("mDispatchListItems", (Serializable) mCompDispatchLists.get(position));
-        intent.putExtra("isComp",2);
-        intent.setClass(getActivity(), DispatchItemsActivity.class);
-        startActivity(intent);
 
     }
 }
