@@ -6,6 +6,7 @@
     <DatePicker
         android:id="@+id/dp_datepicker"
         android:layout_width="match_parent"
+        android:theme="@android:style/Theme.Holo.Light"
         android:layout_height="match_parent"
         android:calendarViewShown="false"
         android:elevation="0dp">

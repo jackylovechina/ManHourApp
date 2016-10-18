@@ -37,6 +37,7 @@ public class ChooseDateFragment extends DialogFragment implements View.OnClickLi
 
         builder.setView(view);
         builder.setTitle("时间筛选");
+        builder.setIcon(R.drawable.calendar_48px);
         builder.setPositiveButton("确定", null).setNegativeButton("取消", null);
 
 
@@ -52,6 +53,7 @@ public class ChooseDateFragment extends DialogFragment implements View.OnClickLi
                 DatePickerFragment startDatePickerFragment = new DatePickerFragment();
                 startDatePickerFragment.setTV(ChooseStartDate_TV);
                 startDatePickerFragment.show(getActivity().getFragmentManager(), "");
+
                 break;
             case R.id.tv_choosedate_end:
 

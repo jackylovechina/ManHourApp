@@ -117,7 +117,6 @@ public class CompDispListFragment extends Fragment implements AdapterView.OnItem
                 mCompDispatchListView.setAdapter(new DispatchListAdapter(mCompDispatchLists, 2));
                 mCompDispatchListView.setOnItemClickListener(CompDispListFragment.this);
 
-
             }
 
             @Override

@@ -27,6 +27,8 @@ public class DatePickerFragment extends DialogFragment implements DatePicker.OnD
     private int mMonth;
     private int mDay;
 
+    AlertDialog.Builder builder;
+
 
     public void setTV(TextView mTextView) {
         this.mTextView = mTextView;
@@ -35,7 +37,7 @@ public class DatePickerFragment extends DialogFragment implements DatePicker.OnD
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder = new AlertDialog.Builder(getActivity());
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_datepicker, null);
         mDatePicker = (DatePicker) view.findViewById(R.id.dp_datepicker);
@@ -50,11 +52,14 @@ public class DatePickerFragment extends DialogFragment implements DatePicker.OnD
 
         builder.setView(view);
 
-        builder.setTitle("选择时间");
+        builder.setTitle("开始时间");
+
         builder.setPositiveButton("确定", this).setNegativeButton("取消", null);
 
         return builder.create();
     }
+
+
 
 
     @Override
@@ -62,6 +67,7 @@ public class DatePickerFragment extends DialogFragment implements DatePicker.OnD
         mYear = year;
         mMonth = monthOfYear + 1;
         mDay = dayOfMonth;
+
     }
 
     @Override
