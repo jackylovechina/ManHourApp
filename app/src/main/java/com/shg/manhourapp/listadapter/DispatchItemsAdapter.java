@@ -43,26 +43,42 @@ public class DispatchItemsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+//        TextView ItemListConstructionSiteName_TV;
+//        TextView ItemListEquipmentName_TV;
+//        TextView ItemListMaterialName_TV;
+//        TextView ItemListVolume_TV;
+//        TextView ItemListShiftName_TV;
+
+        ViewHolder viewHolder = null;
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.dispatchitem_listview_item, parent, false);
+            viewHolder = new ViewHolder();
+
+            viewHolder.ItemListConstructionSiteName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_ConstructionSiteName);
+            viewHolder.ItemListEquipmentName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_EquipmentName);
+            viewHolder.ItemListMaterialName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_MaterialName);
+            viewHolder.ItemListVolume_TV = (TextView) convertView.findViewById(R.id.tv_listitem_Volume);
+            viewHolder.ItemListShiftName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_ShiftName);
+
+            convertView.setTag(viewHolder);
+        } else
+            viewHolder = (ViewHolder) convertView.getTag();
+
+        viewHolder.ItemListConstructionSiteName_TV.setText("场地:" + dispatchListItemsViewModels.get(position).ConstructionSiteName);
+        viewHolder.ItemListEquipmentName_TV.setText("设备:" + dispatchListItemsViewModels.get(position).EquipmentName);
+        viewHolder.ItemListMaterialName_TV.setText("物料:" + dispatchListItemsViewModels.get(position).MaterialName);
+        viewHolder.ItemListVolume_TV.setText("物量:" + dispatchListItemsViewModels.get(position).Volume);
+        viewHolder.ItemListShiftName_TV.setText("班次:" + dispatchListItemsViewModels.get(position).ShiftName);
+
+        return convertView;
+    }
+
+    private static class ViewHolder {
         TextView ItemListConstructionSiteName_TV;
         TextView ItemListEquipmentName_TV;
         TextView ItemListMaterialName_TV;
         TextView ItemListVolume_TV;
         TextView ItemListShiftName_TV;
-
-        if (convertView == null)
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.dispatchitem_listview_item, parent, false);
-        ItemListConstructionSiteName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_ConstructionSiteName);
-        ItemListEquipmentName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_EquipmentName);
-        ItemListMaterialName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_MaterialName);
-        ItemListVolume_TV = (TextView) convertView.findViewById(R.id.tv_listitem_Volume);
-        ItemListShiftName_TV = (TextView) convertView.findViewById(R.id.tv_listitem_ShiftName);
-
-        ItemListConstructionSiteName_TV.setText("场地:" + dispatchListItemsViewModels.get(position).ConstructionSiteName);
-        ItemListEquipmentName_TV.setText("设备:" + dispatchListItemsViewModels.get(position).EquipmentName);
-        ItemListMaterialName_TV.setText("物料:" + dispatchListItemsViewModels.get(position).MaterialName);
-        ItemListVolume_TV.setText("物量:" + dispatchListItemsViewModels.get(position).Volume);
-        ItemListShiftName_TV.setText("班次:" + dispatchListItemsViewModels.get(position).ShiftName);
-
-        return convertView;
     }
 }
