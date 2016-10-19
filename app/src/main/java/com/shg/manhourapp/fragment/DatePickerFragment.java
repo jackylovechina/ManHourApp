@@ -20,7 +20,9 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment implements DatePicker.OnDateChangedListener, DialogInterface.OnClickListener {
 
     private DatePicker mDatePicker;
+
     private TextView mTextView;
+    private int index;
 
     private int mYear;
     private int mMonthOfYear;
@@ -30,8 +32,9 @@ public class DatePickerFragment extends DialogFragment implements DatePicker.OnD
     AlertDialog.Builder builder;
 
 
-    public void setTV(TextView mTextView) {
+    public void setTV(TextView mTextView, int index) {
         this.mTextView = mTextView;
+        this.index = index;
     }
 
     @Override
@@ -51,15 +54,20 @@ public class DatePickerFragment extends DialogFragment implements DatePicker.OnD
         mDatePicker.init(mYear, mMonthOfYear, mDay, this);
 
         builder.setView(view);
+        switch (index) {
+            case 1:
+                builder.setTitle("开始时间");
+                break;
+            case 2:
+                builder.setTitle("结束时间");
+                break;
+        }
 
-        builder.setTitle("开始时间");
 
         builder.setPositiveButton("确定", this).setNegativeButton("取消", null);
 
         return builder.create();
     }
-
-
 
 
     @Override
