@@ -28,6 +28,12 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/MyFullScreen">
+
+        </activity>
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/MyFullScreen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
