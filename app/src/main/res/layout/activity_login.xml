@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_login_in"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ship_128px" />
+        android:src="@drawable/working_hour_128px" />
 
     <EditText
         android:id="@+id/et_login_username"

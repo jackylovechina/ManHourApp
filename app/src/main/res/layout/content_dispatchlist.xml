@@ -32,10 +32,10 @@
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
-            android:drawableTop="@drawable/bottom_bar_img_selector"
+            android:drawableTop="@drawable/uncomp_bottom_img_selector"
             android:gravity="center"
             android:text="未完成"
-            android:textColor="@color/bottom_bar_text_selector" />
+            android:textColor="@color/uncomp_bottom_text_selector" />
 
         <RadioButton
             android:id="@+id/rb_main_check_comp"
@@ -44,10 +44,10 @@
             android:layout_weight="1"
             android:button="@null"
             android:checked="false"
-            android:drawableTop="@drawable/bottom_bar_img_selector"
+            android:drawableTop="@drawable/comp_bottom_img_selector"
             android:gravity="center"
             android:text=" 已完成"
-            android:textColor="@color/bottom_bar_text_selector" />
+            android:textColor="@color/comp_bottom_text_selector" />
     </RadioGroup>
 
 </RelativeLayout>
