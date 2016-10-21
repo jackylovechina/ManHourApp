@@ -7,4 +7,15 @@
     android:background="@drawable/csic_bg_all"
     tools:context="com.shg.manhourapp.WelcomeActivity">
 
+    <TextView
+        android:id="@+id/tv_welcome_num"
+        android:layout_margin="30dp"
+        android:gravity="center"
+        android:text="2s"
+        android:textColor="#ffffff"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shape_roundedcorner_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

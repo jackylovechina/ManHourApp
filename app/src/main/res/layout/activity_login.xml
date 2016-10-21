@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:background="#3399ff"
+        android:background="@drawable/shape_roundedcorner_login"
         android:clickable="true"
         android:padding="5dp"
         android:text="登陆"

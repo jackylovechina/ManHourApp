@@ -18,6 +18,7 @@
     </FrameLayout>
 
     <RadioGroup
+        android:paddingTop="5dp"
         android:id="@+id/rg_main_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
