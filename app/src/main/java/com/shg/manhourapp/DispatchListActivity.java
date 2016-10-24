@@ -62,7 +62,13 @@ public class DispatchListActivity extends AppCompatActivity implements RadioGrou
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+        if (id == R.id.action_userinfo) {
+
+            return true;
+        }
+        if (id == R.id.action_logout) {
+
             return true;
         }
 

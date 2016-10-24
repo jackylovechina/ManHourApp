@@ -2,18 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_divide_line" />
 
     <TextView
 
         android:id="@+id/tv_choosedate_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:drawableLeft="@drawable/calendar_from_48px"
         android:drawablePadding="20dp"
         android:gravity="center_vertical"
-        android:padding="5dp"
+        android:paddingLeft="15dp"
         android:text="开始时间"
         android:textSize="25sp" />
 
@@ -22,10 +27,11 @@
         android:id="@+id/tv_choosedate_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:drawableLeft="@drawable/calendar_to_48px"
         android:drawablePadding="20dp"
         android:gravity="center_vertical"
-        android:padding="5dp"
+        android:paddingLeft="15dp"
         android:text="结束时间"
         android:textSize="25sp" />
 
