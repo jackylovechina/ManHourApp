@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Login_TV = (TextView) findViewById(R.id.tv_login_in);
+        Auto_CB = (CheckBox) findViewById(R.id.cb_login_auto);
+        RemB_CB = (CheckBox) findViewById(R.id.cb_login_remb);
 
         Login_TV.setOnClickListener(this);
 
