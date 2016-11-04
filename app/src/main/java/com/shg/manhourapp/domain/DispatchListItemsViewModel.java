@@ -12,9 +12,9 @@ import java.io.Serializable;
 
 public class DispatchListItemsViewModel implements Serializable{
 
-    public int ManHourActual;
+    public double ManHourActual;
     public String MaterialName;
-    public int Volume;
+    public double Volume;
     public String ShiftName;
     public String ConstructionSiteName;
     public String EquipmentName;
