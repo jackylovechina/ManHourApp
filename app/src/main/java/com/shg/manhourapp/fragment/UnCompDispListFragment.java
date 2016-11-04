@@ -74,7 +74,7 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
         String order = ServerApi.GET_NOCOMPLETE;
 
         params = new RequestParams(url + order);
-        params.addParameter("employeeID", "9195a2f0-97a3-4e52-982d-6e92e9544841");
+        params.addParameter("employeeID", "1733C0AA-BBF5-4CDB-9F0B-83322195C691");
 
         onRefresh();
 
@@ -84,7 +84,7 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         List<DispatchListItemsViewModel> dispatchListItemsViewModels = new ArrayList<>();
-        dispatchListItemsViewModels = mUnCompDispatchLists.get(position).DispatchListItemsViewModel;
+        dispatchListItemsViewModels = mUnCompDispatchLists.get(position).dispatchListItemsViewModel;
 
         Intent intent = new Intent();
         intent.putExtra("mDispatchListItems", (Serializable) mUnCompDispatchLists.get(position));
@@ -107,6 +107,7 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
                 mUnCompDispatchLists = gson.fromJson(result, new TypeToken<List<DispatchListBean>>() {
                 }.getType());
 
+                Log.d("MyLog",mUnCompDispatchLists.get(0).dispatchListItemsViewModel.size()+"");
                 mUnCompDispatchListView.setAdapter(new DispatchListAdapter(mUnCompDispatchLists, 1));
                 mUnCompDispatchListView.setOnItemClickListener(UnCompDispListFragment.this);
 

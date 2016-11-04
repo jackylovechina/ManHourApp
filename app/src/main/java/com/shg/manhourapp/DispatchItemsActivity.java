@@ -57,7 +57,7 @@ public class DispatchItemsActivity extends AppCompatActivity implements AdapterV
         initItemTitle();
 
 
-        mItemList_LV.setAdapter(new DispatchItemsAdapter(mDispatchListItems.DispatchListItemsViewModel));
+        mItemList_LV.setAdapter(new DispatchItemsAdapter(mDispatchListItems.dispatchListItemsViewModel));
         mItemList_LV.setOnItemClickListener(this);
 
     }
@@ -88,21 +88,21 @@ public class DispatchItemsActivity extends AppCompatActivity implements AdapterV
                 break;
         }
 
-        ItemDispatchListNum_TV.setText("派工单编号:" + mDispatchListItems.Num);
-        ItemDispatchScheduledTime_TV.setText("计划时间:" + mDispatchListItems.ScheduledTime.substring(0, 19));
-        ItemDispatchCreatTime_TV.setText("创建时间:" + mDispatchListItems.CreatTime.substring(0, 19));
+        ItemDispatchListNum_TV.setText("派工单编号:" + mDispatchListItems.num);
+        ItemDispatchScheduledTime_TV.setText("计划时间:" + mDispatchListItems.scheduledTime.substring(0, 19));
+        ItemDispatchCreatTime_TV.setText("创建时间:" + mDispatchListItems.creatTime.substring(0, 19));
 
-        ItemDispatchDepartmentName_TV.setText("部门:" + mDispatchListItems.DepartmentName);
-        ItemDispatchGroupName_TV.setText("班组:" + mDispatchListItems.GroupName);
-        ItemDispatchworkingProcedureName_TV.setText("工序:" + mDispatchListItems.WorkingProcedureName);
-        ItemDispatchmanHourTypeName_TV.setText("类型:" + mDispatchListItems.ManHourTypeName);
+        ItemDispatchDepartmentName_TV.setText("部门:" + mDispatchListItems.departmentName);
+        ItemDispatchGroupName_TV.setText("班组:" + mDispatchListItems.groupName);
+        ItemDispatchworkingProcedureName_TV.setText("工序:" + mDispatchListItems.workingProcedureName);
+        ItemDispatchmanHourTypeName_TV.setText("类型:" + mDispatchListItems.manHourTypeName);
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        DispatchListItemsViewModel dispatchListItem = mDispatchListItems.DispatchListItemsViewModel.get(position);
+        DispatchListItemsViewModel dispatchListItem = mDispatchListItems.dispatchListItemsViewModel.get(position);
 
         DetailFragment detailFragment = new DetailFragment();
         detailFragment.getItemDetail(dispatchListItem,isComp);

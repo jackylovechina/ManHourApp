@@ -9,16 +9,16 @@ import java.util.List;
 
 public class DispatchListBean implements Serializable{
 
-    public String ID;
-    public String Num;
-    public String ScheduledTime;
-    public String ComplateTime;
-    public String CreatTime;
-    public String DispatchException;
-    public String GroupName;
-    public String ManHourTypeName;
-    public String WorkingProcedureName;
-    public String DepartmentName;
+    public String id;
+    public String num;
+    public String scheduledTime;
+    public String complateTime;
+    public String creatTime;
+    public String dispatchException;
+    public String groupName;
+    public String manHourTypeName;
+    public String workingProcedureName;
+    public String departmentName;
 
-    public List<DispatchListItemsViewModel> DispatchListItemsViewModel;
+    public List<DispatchListItemsViewModel> dispatchListItemsViewModel;
 }

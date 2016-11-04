@@ -1,6 +1,5 @@
 package com.shg.manhourapp.listadapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,11 +63,11 @@ public class DispatchItemsAdapter extends BaseAdapter {
         } else
             viewHolder = (ViewHolder) convertView.getTag();
 
-        viewHolder.ItemListConstructionSiteName_TV.setText("场地:" + dispatchListItemsViewModels.get(position).ConstructionSiteName);
-        viewHolder.ItemListEquipmentName_TV.setText("设备:" + dispatchListItemsViewModels.get(position).EquipmentName);
-        viewHolder.ItemListMaterialName_TV.setText("物料:" + dispatchListItemsViewModels.get(position).MaterialName);
-        viewHolder.ItemListVolume_TV.setText("物量:" + dispatchListItemsViewModels.get(position).Volume);
-        viewHolder.ItemListShiftName_TV.setText("班次:" + dispatchListItemsViewModels.get(position).ShiftName);
+        viewHolder.ItemListConstructionSiteName_TV.setText("场地:" + dispatchListItemsViewModels.get(position).constructionSiteName);
+        viewHolder.ItemListEquipmentName_TV.setText("设备:" + dispatchListItemsViewModels.get(position).equipmentName);
+        viewHolder.ItemListMaterialName_TV.setText("物料:" + dispatchListItemsViewModels.get(position).materialName);
+        viewHolder.ItemListVolume_TV.setText("物量:" + dispatchListItemsViewModels.get(position).volume);
+        viewHolder.ItemListShiftName_TV.setText("班次:" + dispatchListItemsViewModels.get(position).shiftName);
 
         return convertView;
     }

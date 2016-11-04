@@ -44,11 +44,11 @@ public class DetailFragment extends DialogFragment {
 
             case 1:
                 uncompItemDetailManHourActual_ET.setVisibility(View.VISIBLE);
-                uncompItemDetailManHourActual_ET.setText(Double.toString(dispatchListItem.ManHourActual));
+                uncompItemDetailManHourActual_ET.setText(Double.toString(dispatchListItem.manHourActual));
                 break;
             case 2:
                 compItemDetailManHourActual_TV.setVisibility(View.VISIBLE);
-                compItemDetailManHourActual_TV.setText(Double.toString(dispatchListItem.ManHourActual)+"小时");
+                compItemDetailManHourActual_TV.setText(Double.toString(dispatchListItem.manHourActual)+"小时");
                 break;
         }
 

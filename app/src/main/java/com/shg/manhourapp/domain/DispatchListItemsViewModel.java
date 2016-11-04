@@ -12,14 +12,15 @@ import java.io.Serializable;
 
 public class DispatchListItemsViewModel implements Serializable{
 
-    public double ManHourActual;
-    public String MaterialName;
-    public double Volume;
-    public String ShiftName;
-    public String ConstructionSiteName;
-    public String EquipmentName;
-    public String EmployeeNum;
-    public String EmployeeName;
-    public String EmployeeID;
-    public String ManHourActualID;
+    public double manHourActual;
+    public String materialName;
+    public double volume;
+    public String shiftName;
+    public String constructionSiteName;
+    public String equipmentName;
+    public String employeeNum;
+    public String employeeName;
+    public String employeeID;
+    public String manHourActualID;
+    public String completeDatetime;
 }
