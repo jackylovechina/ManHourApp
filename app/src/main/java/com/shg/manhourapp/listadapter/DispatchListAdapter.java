@@ -12,6 +12,8 @@ import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListBean;
 import com.shg.manhourapp.utils.DateTimeUtils;
 
+import org.w3c.dom.Text;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -74,6 +76,7 @@ public class DispatchListAdapter extends BaseAdapter {
             viewHolder.GroupName_TV = (TextView) convertView.findViewById(R.id.tv_dispatchList_groupName);
             viewHolder.WorkingProcedureName_TV = (TextView) convertView.findViewById(R.id.tv_dispatchList_workingProcedureName);
             viewHolder.ManHourTypeName_TV = (TextView) convertView.findViewById(R.id.tv_dispatchList_manHourTypeName);
+            viewHolder.DispatchException_TV = (TextView) convertView.findViewById(R.id.tv_dispatchList_dispatchException);
 
             convertView.setTag(viewHolder);
         } else
@@ -99,6 +102,8 @@ public class DispatchListAdapter extends BaseAdapter {
         viewHolder.GroupName_TV.setText("班组:" + mDispatchListItems.get(position).groupName);
         viewHolder.WorkingProcedureName_TV.setText("工序:" + mDispatchListItems.get(position).workingProcedureName);
         viewHolder.ManHourTypeName_TV.setText("类型:" + mDispatchListItems.get(position).manHourTypeName);
+        if (mDispatchListItems.get(position).dispatchException != null)
+            viewHolder.DispatchException_TV.setText("派工单异常:"+mDispatchListItems.get(position).dispatchException);
 
 
         return convertView;
@@ -114,6 +119,7 @@ public class DispatchListAdapter extends BaseAdapter {
         TextView GroupName_TV;
         TextView WorkingProcedureName_TV;
         TextView ManHourTypeName_TV;
+        TextView DispatchException_TV;
 
     }
 
