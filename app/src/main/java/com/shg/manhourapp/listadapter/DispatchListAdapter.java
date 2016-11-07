@@ -102,8 +102,8 @@ public class DispatchListAdapter extends BaseAdapter {
         viewHolder.GroupName_TV.setText("班组:" + mDispatchListItems.get(position).groupName);
         viewHolder.WorkingProcedureName_TV.setText("工序:" + mDispatchListItems.get(position).workingProcedureName);
         viewHolder.ManHourTypeName_TV.setText("类型:" + mDispatchListItems.get(position).manHourTypeName);
-        if (mDispatchListItems.get(position).dispatchException != null)
-            viewHolder.DispatchException_TV.setText("派工单异常:"+mDispatchListItems.get(position).dispatchException);
+        if (mDispatchListItems.get(position).dispatchException != null && mDispatchListItems.get(position).dispatchException.length() != 0)
+            viewHolder.DispatchException_TV.setText("派工单异常:" + mDispatchListItems.get(position).dispatchException);
 
 
         return convertView;
