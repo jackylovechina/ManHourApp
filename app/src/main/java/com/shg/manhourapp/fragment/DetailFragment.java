@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,10 +26,12 @@ public class DetailFragment extends DialogFragment {
     private TextView uncompItemDetailStartTime_TV;
     private TextView uncompItemDetailEndTime_TV;
     private TextView uncompItemDetailManHourActualTimes_TV;
+    private EditText uncompItemDetailRemark_ET;
 
     private TextView compItemDetailStartTime_TV;
     private TextView compItemDetailEndTime_TV;
     private TextView compItemDetailManHourActualTimes_TV;
+    private TextView compItemDetailRemark_TV;
 
     private DispatchListItemsViewModel dispatchListItem;
     private int isComp;
@@ -45,6 +48,8 @@ public class DetailFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_detail, null);
         initView(view);
+
+
 
         switch (isComp) {
 
@@ -85,10 +90,11 @@ public class DetailFragment extends DialogFragment {
         uncompItemDetailStartTime_TV = (TextView) view.findViewById(R.id.tv_uncompItemDetail_startTime);
         uncompItemDetailEndTime_TV = (TextView) view.findViewById(R.id.tv_uncompItemDetail_endTime);
         uncompItemDetailManHourActualTimes_TV = (TextView) view.findViewById(R.id.tv_uncompItemDetail_manHourActualTimes);
+        uncompItemDetailRemark_ET= (EditText) view.findViewById(R.id.et_uncompItemDetail_remark);
 
         compItemDetailStartTime_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_startTime);
         compItemDetailEndTime_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_endTime);
         compItemDetailManHourActualTimes_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_manHourActualTimes);
-
+        compItemDetailRemark_TV= (TextView) view.findViewById(R.id.tv_compItemDetail_remark);
     }
 }
