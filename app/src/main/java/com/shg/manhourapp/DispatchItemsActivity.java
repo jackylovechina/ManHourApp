@@ -14,6 +14,7 @@ import com.shg.manhourapp.domain.DispatchListBean;
 import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 import com.shg.manhourapp.fragment.DetailFragment;
 import com.shg.manhourapp.listadapter.DispatchItemsAdapter;
+import com.shg.manhourapp.utils.DateTimeUtils;
 
 public class DispatchItemsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ImageView ItemDispatchImageview_IV;
@@ -89,8 +90,8 @@ public class DispatchItemsActivity extends AppCompatActivity implements AdapterV
         }
 
         ItemDispatchListNum_TV.setText("派工单编号:" + mDispatchListItems.num);
-        ItemDispatchScheduledTime_TV.setText("计划时间:" + mDispatchListItems.scheduledTime.substring(0, 19));
-        ItemDispatchCreatTime_TV.setText("创建时间:" + mDispatchListItems.creatTime.substring(0, 19));
+        ItemDispatchScheduledTime_TV.setText("计划时间:" + DateTimeUtils.getDateTime(mDispatchListItems.scheduledTime));
+        ItemDispatchCreatTime_TV.setText("创建时间:" + DateTimeUtils.getDateTime(mDispatchListItems.creatTime));
 
         ItemDispatchDepartmentName_TV.setText("部门:" + mDispatchListItems.departmentName);
         ItemDispatchGroupName_TV.setText("班组:" + mDispatchListItems.groupName);

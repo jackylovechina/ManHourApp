@@ -1,5 +1,6 @@
 package com.shg.manhourapp.listadapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 
 import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListBean;
+import com.shg.manhourapp.utils.DateTimeUtils;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -90,8 +93,8 @@ public class DispatchListAdapter extends BaseAdapter {
                 break;
         }
         viewHolder.DispatchListNum_TV.setText("派工单编号:" + mDispatchListItems.get(position).num);
-        viewHolder.ScheduledTime_TV.setText("计划时间:" + mDispatchListItems.get(position).scheduledTime.substring(0, 19));
-        viewHolder.CreatTime_TV.setText("创建时间:" + mDispatchListItems.get(position).creatTime.substring(0, 19));
+        viewHolder.ScheduledTime_TV.setText("计划时间:" + DateTimeUtils.getDateTime(mDispatchListItems.get(position).scheduledTime));
+        viewHolder.CreatTime_TV.setText("创建时间:" + DateTimeUtils.getDateTime(mDispatchListItems.get(position).creatTime));
         viewHolder.DepartmentName_TV.setText("部门:" + mDispatchListItems.get(position).departmentName);
         viewHolder.GroupName_TV.setText("班组:" + mDispatchListItems.get(position).groupName);
         viewHolder.WorkingProcedureName_TV.setText("工序:" + mDispatchListItems.get(position).workingProcedureName);

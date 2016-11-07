@@ -107,7 +107,6 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
                 mUnCompDispatchLists = gson.fromJson(result, new TypeToken<List<DispatchListBean>>() {
                 }.getType());
 
-                Log.d("MyLog",mUnCompDispatchLists.get(0).dispatchListItemsViewModel.size()+"");
                 mUnCompDispatchListView.setAdapter(new DispatchListAdapter(mUnCompDispatchLists, 1));
                 mUnCompDispatchListView.setOnItemClickListener(UnCompDispListFragment.this);
 
