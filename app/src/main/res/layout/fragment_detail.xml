@@ -15,26 +15,25 @@
         <TextView
             android:id="@+id/tv_uncompItemDetail_startTime"
             android:layout_width="match_parent"
-            android:background="#363636"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#363636" />
 
         <TextView
             android:id="@+id/tv_uncompItemDetail_endTime"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:background="#363636"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#363636" />
 
         <TextView
             android:id="@+id/tv_uncompItemDetail_manHourActualTimes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/et_uncompItemDetail_remark"
+        <TextView
+            android:id="@+id/tv_uncompItemDetail_remark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请填写备注信息" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

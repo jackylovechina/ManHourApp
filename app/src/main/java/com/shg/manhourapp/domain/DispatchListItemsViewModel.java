@@ -14,7 +14,7 @@ public class DispatchListItemsViewModel implements Serializable{
 
     public double manHourActual;
     public String materialName;
-    public double volume;
+    public String volume;
     public String shiftName;
     public String constructionSiteName;
     public String equipmentName;
