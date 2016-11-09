@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
-            android:text="请选择日期"
+            android:text="请填写备注"
             android:textColor="@android:color/holo_red_light"
             android:textSize="20dp" />
 
