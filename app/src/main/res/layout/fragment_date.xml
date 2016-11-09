@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:text="请选择日期"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_divide_line" />
 
     <DatePicker
         android:layout_width="match_parent"
@@ -11,5 +24,6 @@
         android:theme="@android:style/Theme.Holo.Light">
 
     </DatePicker>
+
 
 </LinearLayout>

@@ -18,7 +18,7 @@ import com.shg.manhourapp.domain.DispatchListItemsViewModel;
  * Created by Administrator on 2016/10/14 0014.
  */
 
-public class DetailFragment extends DialogFragment {
+public class DetailFragment extends DialogFragment implements View.OnClickListener {
 
     private LinearLayout uncompItemDetail_LL;
     private LinearLayout compItemDetail_LL;
@@ -50,7 +50,6 @@ public class DetailFragment extends DialogFragment {
         initView(view);
 
 
-
         switch (isComp) {
 
             case 1:
@@ -62,6 +61,7 @@ public class DetailFragment extends DialogFragment {
                 compItemDetailManHourActualTimes_TV.setText(Double.toString(dispatchListItem.manHourActual) + "小时");
                 break;
         }
+        uncompItemDetailStartTime_TV.setOnClickListener(this);
 
         builder.setTitle("实际工时:");
         builder.setIcon(R.drawable.ic_launcher_green);
@@ -90,11 +90,22 @@ public class DetailFragment extends DialogFragment {
         uncompItemDetailStartTime_TV = (TextView) view.findViewById(R.id.tv_uncompItemDetail_startTime);
         uncompItemDetailEndTime_TV = (TextView) view.findViewById(R.id.tv_uncompItemDetail_endTime);
         uncompItemDetailManHourActualTimes_TV = (TextView) view.findViewById(R.id.tv_uncompItemDetail_manHourActualTimes);
-        uncompItemDetailRemark_ET= (EditText) view.findViewById(R.id.et_uncompItemDetail_remark);
+        uncompItemDetailRemark_ET = (EditText) view.findViewById(R.id.et_uncompItemDetail_remark);
 
         compItemDetailStartTime_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_startTime);
         compItemDetailEndTime_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_endTime);
         compItemDetailManHourActualTimes_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_manHourActualTimes);
-        compItemDetailRemark_TV= (TextView) view.findViewById(R.id.tv_compItemDetail_remark);
+        compItemDetailRemark_TV = (TextView) view.findViewById(R.id.tv_compItemDetail_remark);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_uncompItemDetail_startTime:
+                UpdateInfoFragment dateTimePicker = new UpdateInfoFragment();
+
+                dateTimePicker.show(getFragmentManager(), "date");
+                break;
+        }
     }
 }
