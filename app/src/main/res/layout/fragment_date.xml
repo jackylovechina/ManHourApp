@@ -18,6 +18,7 @@
         android:background="@drawable/shape_divide_line" />
 
     <DatePicker
+        android:id="@+id/dp_choosedate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:calendarViewShown="false"

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.shg.manhourapp.R;
 
@@ -30,12 +31,18 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
     private Button updateInfoNext_BT;
     private Button updateInfoBefore_BT;
 
+    private TextView textView;
+
     private List<Fragment> allFragments;
     private int index = 0;
 
     Fragment mDateFragment;
     Fragment mTimeFragment;
 
+    public void getTextView(TextView tv) {
+
+        this.textView = tv;
+    }
 
     @Nullable
     @Override
