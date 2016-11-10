@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TimePicker;
 
 import com.shg.manhourapp.R;
+import com.shg.manhourapp.utils.GlobalVar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,10 +32,6 @@ public class TimeFragment extends DialogFragment implements TimePicker.OnTimeCha
 
     private DateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
 
-    public void getTimeView() {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,6 +47,7 @@ public class TimeFragment extends DialogFragment implements TimePicker.OnTimeCha
                 calendar.setTime(time);
                 mHourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
                 mMinuteOfHour = calendar.get(Calendar.MINUTE);
+                GlobalVar.TIME = mHourOfDay + ":" + mMinuteOfHour + ":" + "00";
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -57,6 +55,7 @@ public class TimeFragment extends DialogFragment implements TimePicker.OnTimeCha
             Calendar calendar = Calendar.getInstance();
             mHourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
             mMinuteOfHour = calendar.get(Calendar.MINUTE);
+            GlobalVar.TIME = mHourOfDay + ":" + mMinuteOfHour + ":" + "00";
         }
 //        Log.d("MyLog", timeStr);
         chooseTime_TP.setOnTimeChangedListener(this);
@@ -68,6 +67,7 @@ public class TimeFragment extends DialogFragment implements TimePicker.OnTimeCha
 
     @Override
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+        GlobalVar.TIME = mHourOfDay + ":" + mMinuteOfHour + ":" + "00";
 
     }
 }

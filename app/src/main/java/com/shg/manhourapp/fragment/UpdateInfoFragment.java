@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shg.manhourapp.R;
+import com.shg.manhourapp.utils.GlobalVar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,9 +127,8 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
 
                 } else {
                     Log.d("MyLog", "end");
-
-
-
+                    textView.setText(GlobalVar.DATE + " " + GlobalVar.TIME);
+                    this.dismiss();
                 }
                 break;
             case R.id.bt_updateinfo_before:

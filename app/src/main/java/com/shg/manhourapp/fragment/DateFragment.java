@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.shg.manhourapp.R;
+import com.shg.manhourapp.utils.GlobalVar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -35,11 +36,6 @@ public class DateFragment extends Fragment implements DatePicker.OnDateChangedLi
 
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
 
-
-    public void getDateView() {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +54,8 @@ public class DateFragment extends Fragment implements DatePicker.OnDateChangedLi
                 mYear = calendar.get(Calendar.YEAR);
                 mMonthOfYear = calendar.get(Calendar.MONTH);
                 mDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
+                int mMonth = mMonthOfYear + 1;
+                GlobalVar.DATE = mYear + "-" + mMonth + "-" + mDayOfMonth;
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -67,6 +64,8 @@ public class DateFragment extends Fragment implements DatePicker.OnDateChangedLi
             mYear = calendar.get(Calendar.YEAR);
             mMonthOfYear = calendar.get(Calendar.MONTH);
             mDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+            int mMonth = mMonthOfYear + 1;
+            GlobalVar.DATE = mYear + "-" + mMonth + "-" + mDayOfMonth;
         }
 
         chooseDate_DP.init(mYear, mMonthOfYear, mDayOfMonth, this);
@@ -76,6 +75,8 @@ public class DateFragment extends Fragment implements DatePicker.OnDateChangedLi
 
     @Override
     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        int mMonth = monthOfYear + 1;
+        GlobalVar.DATE = year + "-" + mMonth + "-" + dayOfMonth;
 
     }
 
