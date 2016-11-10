@@ -28,13 +28,14 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
     private View view;
     private ViewPager updateInfo_VP;
     private Button updateInfoNext_BT;
+    private Button updateInfoBefore_BT;
 
     private List<Fragment> allFragments;
     private int index = 0;
 
     Fragment mDateFragment;
     Fragment mTimeFragment;
-    Fragment mRemarkFragment;
+
 
     @Nullable
     @Override
@@ -45,6 +46,7 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
 
         updateInfo_VP = (ViewPager) view.findViewById(R.id.vp_updateInfo);
         updateInfoNext_BT = (Button) view.findViewById(R.id.bt_updateinfo_next);
+        updateInfoBefore_BT = (Button) view.findViewById(R.id.bt_updateinfo_before);
 
         allFragments = initFragments();
 
@@ -60,6 +62,7 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
             }
         });
         updateInfo_VP.addOnPageChangeListener(this);
+        updateInfoBefore_BT.setOnClickListener(this);
         updateInfoNext_BT.setOnClickListener(this);
 
         ((ImageView) view.findViewById(R.id.iv_updateinfo_date)).setImageResource(R.drawable.black_pot);
@@ -73,11 +76,11 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
         List<Fragment> fragments = new ArrayList<>();
         mDateFragment = new DateFragment();
         mTimeFragment = new TimeFragment();
-        mRemarkFragment = new RemarkFragment();
+
 
         fragments.add(mDateFragment);
         fragments.add(mTimeFragment);
-        fragments.add(mRemarkFragment);
+
 
         return fragments;
 
@@ -88,13 +91,24 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_updateinfo_next:
-                if (index < 2) {
+                if (index < allFragments.size() - 1) {
 
                     updateInfo_VP.setCurrentItem(index + 1);
 
                 } else {
                     Log.d("MyLog", "end");
                 }
+                break;
+            case R.id.bt_updateinfo_before:
+                if (index > 0) {
+
+                    updateInfo_VP.setCurrentItem(index - 1);
+
+                } else {
+                    Log.d("MyLog", "start");
+                }
+
+
                 break;
         }
 
@@ -117,9 +131,7 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
             case 1:
                 ((ImageView) view.findViewById(R.id.iv_updateinfo_time)).setImageResource(R.drawable.black_pot);
                 break;
-            case 2:
-                ((ImageView) view.findViewById(R.id.iv_updateinfo_remark)).setImageResource(R.drawable.black_pot);
-                break;
+
         }
     }
 
@@ -129,10 +141,10 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
     }
 
     private void resetPageIndex() {
+
         ((ImageView) view.findViewById(R.id.iv_updateinfo_date)).setImageResource(R.drawable.green_pot);
 
         ((ImageView) view.findViewById(R.id.iv_updateinfo_time)).setImageResource(R.drawable.green_pot);
 
-        ((ImageView) view.findViewById(R.id.iv_updateinfo_remark)).setImageResource(R.drawable.green_pot);
     }
 }

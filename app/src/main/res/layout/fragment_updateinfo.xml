@@ -12,10 +12,24 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bt_updateinfo_next"
-            android:layout_width="wrap_content"
+            android:id="@+id/bt_updateinfo_before"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="下一步" />
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_roundedcorner_button"
+            android:text="上一步"
+            android:textColor="@color/login_textcolor_selector" />
+
+        <Button
+            android:id="@+id/bt_updateinfo_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_roundedcorner_button"
+            android:text="下一步"
+            android:textColor="@color/login_textcolor_selector" />
     </LinearLayout>
 
     <LinearLayout
@@ -38,11 +52,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/green_pot" />
 
-        <ImageView
-            android:id="@+id/iv_updateinfo_remark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/green_pot" />
 
     </LinearLayout>
 
