@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 import com.shg.manhourapp.utils.DateTimeUtils;
 
+import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,9 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
 
     private DispatchListItemsViewModel dispatchListItem;
     private int isComp;
+
+    private String startTime;
+    private String endTime;
 
     public void getItemDetail(DispatchListItemsViewModel dispatchListItem, int isComp) {
         this.dispatchListItem = dispatchListItem;
@@ -84,14 +89,57 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
         builder.setTitle("实际工时:");
         builder.setIcon(R.drawable.ic_launcher_green);
 
-        builder.setView(view).setPositiveButton("提交", new DialogInterface.OnClickListener() {
+        builder.setView(view);
+        builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                startTime = uncompItemDetailStartTime_TV.getText().toString();
+                endTime = uncompItemDetailEndTime_TV.getText().toString();
+                if (startTime.equals("开始时间") || endTime.equals("结束时间")) {
+
+                    Toast.makeText(getActivity(), "请填写正确的时间格式,提交失败", Toast.LENGTH_SHORT).show();
+                    try {
+                        Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                        field.setAccessible(true);
+                        field.set(dialog, false);
+                    } catch (NoSuchFieldException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+
+                    try {
+                        Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                        field.setAccessible(true);
+                        field.set(dialog, true);
+                    } catch (NoSuchFieldException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+
+                }
 
             }
         });
 
-        builder.setNegativeButton("取消", null);
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                    field.setAccessible(true);
+                    field.set(dialog, true);
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         builder.setCancelable(false);
 
         Dialog dialog = builder.create();
