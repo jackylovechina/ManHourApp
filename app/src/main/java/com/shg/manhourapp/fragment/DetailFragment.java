@@ -79,6 +79,7 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 break;
         }
         uncompItemDetailStartTime_TV.setOnClickListener(this);
+        uncompItemDetailEndTime_TV.setOnClickListener(this);
 
         builder.setTitle("实际工时:");
         builder.setIcon(R.drawable.ic_launcher_green);
@@ -127,9 +128,9 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 Date endTime_date = format.parse(endTime);
                 long endTime_long = endTime_date.getTime();
                 long startTime_long = endTime_long - (long) (actualHours * 3600 * 1000);
-                Log.d("MyLog", endTime_long + "|||" + startTime_long);
+//                Log.d("MyLog", endTime_long + "|||" + startTime_long);
                 Date startTime_date = new Date(startTime_long);
-                Log.d("MyLog", endTime_date + "|||" + startTime_date);
+//                Log.d("MyLog", endTime_date + "|||" + startTime_date);
                 startTime = format.format(startTime_date);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -148,6 +149,11 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 UpdateInfoFragment startTimePicker = new UpdateInfoFragment();
                 startTimePicker.getTextView(uncompItemDetailStartTime_TV);
                 startTimePicker.show(getFragmentManager(), "startTime");
+                break;
+            case R.id.tv_uncompItemDetail_endTime:
+                UpdateInfoFragment endTimePicker = new UpdateInfoFragment();
+                endTimePicker.getTextView(uncompItemDetailEndTime_TV);
+                endTimePicker.show(getFragmentManager(), "endTime");
                 break;
         }
     }

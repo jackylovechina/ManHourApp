@@ -17,6 +17,7 @@
         android:background="@drawable/shape_divide_line" />
 
     <TimePicker
+        android:id="@+id/tp_choosetime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@android:style/Theme.Holo.Light">

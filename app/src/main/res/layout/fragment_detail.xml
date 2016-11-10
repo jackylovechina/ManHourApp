@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:background="#66ffcc"
             android:padding="5dp"
+            android:drawableLeft="@drawable/s_24px"
             android:text="开始时间"
             android:textSize="20sp" />
 
@@ -28,6 +29,7 @@
             android:layout_marginTop="10dp"
             android:background="#66ffcc"
             android:padding="5dp"
+            android:drawableLeft="@drawable/e_24px"
             android:text="结束时间"
             android:textSize="20sp" />
 

@@ -32,6 +32,10 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
     private Button updateInfoBefore_BT;
 
     private TextView textView;
+    private String datetimeStr;
+    private String[] datetime;
+    private String dateStr;
+    private String timeStr;
 
     private List<Fragment> allFragments;
     private int index = 0;
@@ -54,6 +58,16 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
         updateInfo_VP = (ViewPager) view.findViewById(R.id.vp_updateInfo);
         updateInfoNext_BT = (Button) view.findViewById(R.id.bt_updateinfo_next);
         updateInfoBefore_BT = (Button) view.findViewById(R.id.bt_updateinfo_before);
+
+        datetimeStr = textView.getText().toString();
+        if (datetimeStr.equals("开始时间") || datetimeStr.equals("结束时间")) {
+//            Log.d("MyLog", "ERROR");
+        } else {
+            datetime = datetimeStr.split(" ");
+            dateStr = datetime[0];
+            timeStr = datetime[1];
+            Log.d("MyLog", dateStr + "|" + timeStr);
+        }
 
         allFragments = initFragments();
 
@@ -80,9 +94,17 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
 
     private List<Fragment> initFragments() {
 
-        List<Fragment> fragments = new ArrayList<>();
+        List<Fragment> fragments = new ArrayList<Fragment>();
+        Bundle bundle = new Bundle();
+
         mDateFragment = new DateFragment();
+        bundle.putString("dateStr", dateStr);
+        mDateFragment.setArguments(bundle);
+
+
         mTimeFragment = new TimeFragment();
+        bundle.putString("timeStr", timeStr);
+        mTimeFragment.setArguments(bundle);
 
 
         fragments.add(mDateFragment);
@@ -104,6 +126,9 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
 
                 } else {
                     Log.d("MyLog", "end");
+
+
+
                 }
                 break;
             case R.id.bt_updateinfo_before:
@@ -134,6 +159,7 @@ public class UpdateInfoFragment extends DialogFragment implements View.OnClickLi
         switch (position) {
             case 0:
                 ((ImageView) view.findViewById(R.id.iv_updateinfo_date)).setImageResource(R.drawable.black_pot);
+
                 break;
             case 1:
                 ((ImageView) view.findViewById(R.id.iv_updateinfo_time)).setImageResource(R.drawable.black_pot);
