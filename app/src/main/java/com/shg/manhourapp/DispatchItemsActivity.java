@@ -15,6 +15,7 @@ import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 import com.shg.manhourapp.fragment.DetailFragment;
 import com.shg.manhourapp.listadapter.DispatchItemsAdapter;
 import com.shg.manhourapp.utils.DateTimeUtils;
+import com.shg.manhourapp.utils.GlobalVar;
 
 public class DispatchItemsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ImageView ItemDispatchImageview_IV;
@@ -32,10 +33,15 @@ public class DispatchItemsActivity extends AppCompatActivity implements AdapterV
     private DispatchListBean mDispatchListItems;
     private int isComp;
 
+    private DispatchItemsActivity instance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        GlobalVar.DISP_INSTANCE = instance = this;
+
         setContentView(R.layout.activity_dispatchitems);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 

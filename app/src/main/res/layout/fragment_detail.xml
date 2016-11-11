@@ -59,7 +59,11 @@
         <TextView
             android:id="@+id/tv_compItemDetail_startTime"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#66ffcc"
+            android:drawableLeft="@drawable/s_24px"
+            android:padding="5dp"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_compItemDetail_endTime"
@@ -74,8 +78,8 @@
         <TextView
             android:id="@+id/tv_compItemDetail_manHourActualTimes"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textSize="20sp" />
 
         <TextView

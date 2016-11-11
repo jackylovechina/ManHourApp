@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListBean;
 import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 import com.shg.manhourapp.listadapter.DispatchListAdapter;
+import com.shg.manhourapp.utils.GlobalVar;
 import com.shg.manhourapp.utils.ServerApi;
 
 import org.xutils.HttpManager;
@@ -44,6 +44,7 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
     private HttpManager httpManager;
     private RequestParams params;
 
+    private UnCompDispListFragment instance;
 
     public UnCompDispListFragment() {
         // Required empty public constructor
@@ -54,6 +55,8 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        GlobalVar.UNCOMP_INSTANCE = instance = this;
+
         View view = inflater.inflate(R.layout.fragment_uncompdisplist, container, false);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_uncomp_dropRefresh);
         mUnCompDispatchListView = (ListView) view.findViewById(R.id.lv_uncomp_dispatchlistview);
