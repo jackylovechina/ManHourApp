@@ -47,6 +47,8 @@ public class TimeFragment extends DialogFragment implements TimePicker.OnTimeCha
                 calendar.setTime(time);
                 mHourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
                 mMinuteOfHour = calendar.get(Calendar.MINUTE);
+
+
                 GlobalVar.TIME = mHourOfDay + ":" + mMinuteOfHour + ":" + "00";
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -55,19 +57,25 @@ public class TimeFragment extends DialogFragment implements TimePicker.OnTimeCha
             Calendar calendar = Calendar.getInstance();
             mHourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
             mMinuteOfHour = calendar.get(Calendar.MINUTE);
+//            chooseTime_TP.setOnTimeChangedListener(this);
+//            chooseTime_TP.setCurrentHour(mHourOfDay);
+//            chooseTime_TP.setCurrentMinute(mMinuteOfHour);
+
             GlobalVar.TIME = mHourOfDay + ":" + mMinuteOfHour + ":" + "00";
         }
 //        Log.d("MyLog", timeStr);
         chooseTime_TP.setOnTimeChangedListener(this);
         chooseTime_TP.setCurrentHour(mHourOfDay);
         chooseTime_TP.setCurrentMinute(mMinuteOfHour);
+
         return view;
     }
 
 
     @Override
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-        GlobalVar.TIME = mHourOfDay + ":" + mMinuteOfHour + ":" + "00";
+
+        GlobalVar.TIME = hourOfDay + ":" + minute + ":" + "00";
 
     }
 }

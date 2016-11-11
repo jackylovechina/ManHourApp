@@ -5,10 +5,12 @@ package com.shg.manhourapp.utils;
  */
 
 public class ServerApi {
+    //172.16.191.20//192.168.58.128
+    public static String Address = "http://172.16.191.20:5000/api/ManHourActualForAndroid/";
 
-    public static String Address="http://172.16.191.20:5000/api/ManHourActualForAndroid/";
+    public static String GET_NOCOMPLETE = "GetNoCompletedDispatchListItemsByEmployee";
 
-    public static String GET_NOCOMPLETE="GetNoCompletedDispatchListItemsByEmployee";
+    public static String GET_COMPLETE = "GetCompletedDispatchListItemsByEmployee";
 
-    public static String GET_COMPLETE="GetCompletedDispatchListItemsByEmployee";
+    public static String UPDATE = "Update";
 }

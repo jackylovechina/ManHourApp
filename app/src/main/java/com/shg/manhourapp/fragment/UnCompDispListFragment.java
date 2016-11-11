@@ -75,7 +75,7 @@ public class UnCompDispListFragment extends Fragment implements AdapterView.OnIt
 
         params = new RequestParams(url + order);
         params.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
-
+        //1733C0AA-BBF5-4CDB-9F0B-83322195C691//36368FBA-08B4-48A7-BDC4-8511EFCDD820
         onRefresh();
 
     }

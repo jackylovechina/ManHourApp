@@ -23,4 +23,5 @@ public class DispatchListItemsViewModel implements Serializable{
     public String employeeID;
     public String manHourActualID;
     public String completeDatetime;
+    public String remark;
 }

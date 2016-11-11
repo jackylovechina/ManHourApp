@@ -13,16 +13,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 import com.shg.manhourapp.utils.DateTimeUtils;
+import com.shg.manhourapp.utils.ServerApi;
+
+import org.xutils.HttpManager;
+import org.xutils.common.Callback;
+import org.xutils.http.HttpMethod;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.lang.reflect.Field;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.zip.DeflaterInputStream;
 
 /**
  * Created by Administrator on 2016/10/14 0014.
@@ -46,6 +58,7 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
     private DispatchListItemsViewModel dispatchListItem;
     private int isComp;
 
+    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private String startTime;
     private String endTime;
 
@@ -73,6 +86,7 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 if (dispatchListItem.completeDatetime != null && dispatchListItem.completeDatetime.length() != 0) {
                     uncompItemDetailStartTime_TV.setText(getStartTime(DateTimeUtils.getDateTime(dispatchListItem.completeDatetime), 5.5));
                     uncompItemDetailEndTime_TV.setText(DateTimeUtils.getDateTime(dispatchListItem.completeDatetime));
+
                 }
 
                 break;
@@ -99,6 +113,7 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 if (startTime.equals("开始时间") || endTime.equals("结束时间")) {
 
                     Toast.makeText(getActivity(), "请填写正确的时间格式,提交失败", Toast.LENGTH_SHORT).show();
+
                     try {
                         Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
                         field.setAccessible(true);
@@ -110,6 +125,74 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                     }
 
                 } else {
+
+                    HttpManager update_manager = x.http();
+                    String url = ServerApi.Address;
+                    String order = ServerApi.UPDATE;
+                    RequestParams putParams = new RequestParams(url + order);
+
+//                    Map<String, Object> map = new HashMap<String, Object>();
+//                    map.put("ManHourActualID", dispatchListItem.manHourActualID);
+//                    map.put("ManHourActual", compute_manHourActual(startTime, endTime));
+//                    map.put("CompleteDatetime", endTime);
+//                    map.put("Remark", "");
+//
+//                    map.put("MaterialName", "");
+//                    map.put("Volume", "");
+//                    map.put("ShiftName", "");
+//                    map.put("ConstructionSiteName", "");
+//                    map.put("EquipmentName", "");
+//                    map.put("EmployeeNum", "");
+//                    map.put("EmployeeName", "");
+//                    map.put("EmployeeID", "");
+                    DispatchListItemsViewModel d = new DispatchListItemsViewModel();
+                    d.manHourActualID = dispatchListItem.manHourActualID;
+                    d.manHourActual = compute_manHourActual(startTime, endTime);
+                    d.completeDatetime = endTime;
+                    d.remark = "";
+
+                    Gson gson = new Gson();
+
+                    String viewModel = gson.toJson(d);
+
+                    Log.d("MyLog", viewModel);
+
+
+//                    putParams.addBodyParameter("manHourActualID", dispatchListItem.manHourActualID);
+//                    putParams.addBodyParameter("manHourActual", Double.toString(compute_manHourActual(startTime, endTime)));
+//                    putParams.addBodyParameter("completeDatetime", endTime);
+//                    putParams.addBodyParameter("remark", "");
+
+//                    putParams.addBodyParameter("viewModel", viewModel);
+
+                    putParams.setAsJsonContent(true);
+                    putParams.setBodyContent(viewModel);
+
+                    update_manager.request(HttpMethod.PUT, putParams, new Callback.CommonCallback<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                            Log.d("MyLog", result);
+
+                        }
+
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+
+                            Log.d("MyLog", isOnCallback + "|" + ex.toString());
+
+                        }
+
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
 
                     try {
                         Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
@@ -170,7 +253,7 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
 
         if (endTime != null && endTime.length() != 0) {
 
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+            format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
 
             try {
                 Date endTime_date = format.parse(endTime);
@@ -188,6 +271,25 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
         }
 
         return null;
+    }
+
+    private double compute_manHourActual(String startTime, String endTime) {
+
+        double manHours = 0.00;
+        DecimalFormat df   = new DecimalFormat("######0.00");
+
+        try {
+            long s_Time = format.parse(startTime).getTime();
+            long e_Time = format.parse(endTime).getTime();
+
+            manHours = (double)(e_Time - s_Time) / (3600 * 1000);
+            manHours=Double.parseDouble(df.format(manHours));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return manHours;
     }
 
     @Override

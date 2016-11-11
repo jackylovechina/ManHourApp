@@ -32,6 +32,7 @@ public class DispatchItemsActivity extends AppCompatActivity implements AdapterV
     private DispatchListBean mDispatchListItems;
     private int isComp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +107,7 @@ public class DispatchItemsActivity extends AppCompatActivity implements AdapterV
         DispatchListItemsViewModel dispatchListItem = mDispatchListItems.dispatchListItemsViewModel.get(position);
 
         DetailFragment detailFragment = new DetailFragment();
-        detailFragment.getItemDetail(dispatchListItem,isComp);
+        detailFragment.getItemDetail(dispatchListItem, isComp);
         detailFragment.show(getSupportFragmentManager(), "");
 
     }
