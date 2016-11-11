@@ -84,6 +84,7 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
 
 
                 if (dispatchListItem.completeDatetime != null && dispatchListItem.completeDatetime.length() != 0) {
+
                     uncompItemDetailStartTime_TV.setText(getStartTime(DateTimeUtils.getDateTime(dispatchListItem.completeDatetime), 5.5));
                     uncompItemDetailEndTime_TV.setText(DateTimeUtils.getDateTime(dispatchListItem.completeDatetime));
 
@@ -94,6 +95,9 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 compItemDetail_LL.setVisibility(View.VISIBLE);
                 compItemDetailManHourActualTimes_TV.setText("实动工时:" + Double.toString(dispatchListItem.manHourActual) + "小时");
 
+                if (dispatchListItem.completeDatetime != null && dispatchListItem.completeDatetime.length() != 0) {
+                    compItemDetailEndTime_TV.setText("" + DateTimeUtils.getDateTime(dispatchListItem.completeDatetime));
+                }
 
                 break;
         }
@@ -276,14 +280,14 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
     private double compute_manHourActual(String startTime, String endTime) {
 
         double manHours = 0.00;
-        DecimalFormat df   = new DecimalFormat("######0.00");
+        DecimalFormat df = new DecimalFormat("######0.00");
 
         try {
             long s_Time = format.parse(startTime).getTime();
             long e_Time = format.parse(endTime).getTime();
 
-            manHours = (double)(e_Time - s_Time) / (3600 * 1000);
-            manHours=Double.parseDouble(df.format(manHours));
+            manHours = (double) (e_Time - s_Time) / (3600 * 1000);
+            manHours = Double.parseDouble(df.format(manHours));
 
         } catch (ParseException e) {
             e.printStackTrace();

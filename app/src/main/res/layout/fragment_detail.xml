@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#66ffcc"
-            android:padding="5dp"
             android:drawableLeft="@drawable/s_24px"
+            android:padding="5dp"
             android:text="开始时间"
             android:textSize="20sp" />
 
@@ -28,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="#66ffcc"
-            android:padding="5dp"
             android:drawableLeft="@drawable/e_24px"
+            android:padding="5dp"
             android:text="结束时间"
             android:textSize="20sp" />
 
@@ -44,8 +44,8 @@
             android:id="@+id/et_uncompItemDetail_remark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请填写备注信息"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="请填写备注信息" />
 
     </LinearLayout>
 
@@ -64,7 +64,12 @@
         <TextView
             android:id="@+id/tv_compItemDetail_endTime"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#66ffcc"
+            android:drawableLeft="@drawable/e_24px"
+            android:padding="5dp"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_compItemDetail_manHourActualTimes"
