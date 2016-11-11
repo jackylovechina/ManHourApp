@@ -135,20 +135,6 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                     String order = ServerApi.UPDATE;
                     RequestParams putParams = new RequestParams(url + order);
 
-//                    Map<String, Object> map = new HashMap<String, Object>();
-//                    map.put("ManHourActualID", dispatchListItem.manHourActualID);
-//                    map.put("ManHourActual", compute_manHourActual(startTime, endTime));
-//                    map.put("CompleteDatetime", endTime);
-//                    map.put("Remark", "");
-//
-//                    map.put("MaterialName", "");
-//                    map.put("Volume", "");
-//                    map.put("ShiftName", "");
-//                    map.put("ConstructionSiteName", "");
-//                    map.put("EquipmentName", "");
-//                    map.put("EmployeeNum", "");
-//                    map.put("EmployeeName", "");
-//                    map.put("EmployeeID", "");
                     DispatchListItemsViewModel d = new DispatchListItemsViewModel();
                     d.manHourActualID = dispatchListItem.manHourActualID;
                     d.manHourActual = compute_manHourActual(startTime, endTime);
@@ -161,13 +147,6 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
 
                     Log.d("MyLog", viewModel);
 
-
-//                    putParams.addBodyParameter("manHourActualID", dispatchListItem.manHourActualID);
-//                    putParams.addBodyParameter("manHourActual", Double.toString(compute_manHourActual(startTime, endTime)));
-//                    putParams.addBodyParameter("completeDatetime", endTime);
-//                    putParams.addBodyParameter("remark", "");
-
-//                    putParams.addBodyParameter("viewModel", viewModel);
 
                     putParams.setAsJsonContent(true);
                     putParams.setBodyContent(viewModel);
