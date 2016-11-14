@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.shg.manhourapp.R;
 import com.shg.manhourapp.domain.DispatchListItemsViewModel;
 import com.shg.manhourapp.utils.DateTimeUtils;
-import com.shg.manhourapp.utils.GlobalVar;
 import com.shg.manhourapp.utils.ServerApi;
 
 import org.xutils.HttpManager;
@@ -97,7 +96,6 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
                 compItemDetailManHourActualTimes_TV.setText("实动工时:" + Double.toString(dispatchListItem.manHourActual) + "小时");
 
                 if (dispatchListItem.completeDatetime != null && dispatchListItem.completeDatetime.length() != 0) {
-                    compItemDetailStartTime_TV.setText(getStartTime(DateTimeUtils.getDateTime(dispatchListItem.completeDatetime), dispatchListItem.manHourActual));
                     compItemDetailEndTime_TV.setText("" + DateTimeUtils.getDateTime(dispatchListItem.completeDatetime));
                 }
 
@@ -110,103 +108,110 @@ public class DetailFragment extends DialogFragment implements View.OnClickListen
         builder.setIcon(R.drawable.ic_launcher_green);
 
         builder.setView(view);
-        switch (isComp) {
-            case 1:
-                builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-                        startTime = uncompItemDetailStartTime_TV.getText().toString();
-                        endTime = uncompItemDetailEndTime_TV.getText().toString();
-                        if (startTime.equals("开始时间") || endTime.equals("结束时间")) {
+                startTime = uncompItemDetailStartTime_TV.getText().toString();
+                endTime = uncompItemDetailEndTime_TV.getText().toString();
+                if (startTime.equals("开始时间") || endTime.equals("结束时间")) {
 
-                            Toast.makeText(getActivity(), "请填写正确的时间格式,提交失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "请填写正确的时间格式,提交失败", Toast.LENGTH_SHORT).show();
 
-                            try {
-                                Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
-                                field.setAccessible(true);
-                                field.set(dialog, false);
-                            } catch (NoSuchFieldException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
+                    try {
+                        Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                        field.setAccessible(true);
+                        field.set(dialog, false);
+                    } catch (NoSuchFieldException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
 
-                        } else {
+                } else {
 
-                            HttpManager update_manager = x.http();
-                            String url = ServerApi.Address;
-                            String order = ServerApi.UPDATE;
-                            RequestParams putParams = new RequestParams(url + order);
+                    HttpManager update_manager = x.http();
+                    String url = ServerApi.Address;
+                    String order = ServerApi.UPDATE;
+                    RequestParams putParams = new RequestParams(url + order);
 
-                            DispatchListItemsViewModel d = new DispatchListItemsViewModel();
-                            d.manHourActualID = dispatchListItem.manHourActualID;
-                            d.manHourActual = compute_manHourActual(startTime, endTime);
-                            d.completeDatetime = endTime;
-                            d.remark = "";
+//                    Map<String, Object> map = new HashMap<String, Object>();
+//                    map.put("ManHourActualID", dispatchListItem.manHourActualID);
+//                    map.put("ManHourActual", compute_manHourActual(startTime, endTime));
+//                    map.put("CompleteDatetime", endTime);
+//                    map.put("Remark", "");
+//
+//                    map.put("MaterialName", "");
+//                    map.put("Volume", "");
+//                    map.put("ShiftName", "");
+//                    map.put("ConstructionSiteName", "");
+//                    map.put("EquipmentName", "");
+//                    map.put("EmployeeNum", "");
+//                    map.put("EmployeeName", "");
+//                    map.put("EmployeeID", "");
+                    DispatchListItemsViewModel d = new DispatchListItemsViewModel();
+                    d.manHourActualID = dispatchListItem.manHourActualID;
+                    d.manHourActual = compute_manHourActual(startTime, endTime);
+                    d.completeDatetime = endTime;
+                    d.remark = "";
 
-                            Gson gson = new Gson();
+                    Gson gson = new Gson();
 
-                            String viewModel = gson.toJson(d);
+                    String viewModel = gson.toJson(d);
 
-                            Log.d("MyLog", viewModel);
-
-
-                            putParams.setAsJsonContent(true);
-                            putParams.setBodyContent(viewModel);
-
-                            update_manager.request(HttpMethod.PUT, putParams, new Callback.CommonCallback<Integer>() {
-                                @Override
-                                public void onSuccess(Integer result) {
-
-                                    Toast.makeText(getActivity(),"提交成功",Toast.LENGTH_SHORT).show();
-                                    Log.d("MyLog", result + "");
-
-                                }
-
-                                @Override
-                                public void onError(Throwable ex, boolean isOnCallback) {
-
-                                    Toast.makeText(getActivity(),"提交失败",Toast.LENGTH_SHORT).show();
-                                    Log.d("MyLog", isOnCallback + "|" + ex.toString());
-
-                                }
-
-                                @Override
-                                public void onCancelled(CancelledException cex) {
-
-                                }
-
-                                @Override
-                                public void onFinished() {
-                                    Log.d("MyLog", "end");
+                    Log.d("MyLog", viewModel);
 
 
-                                }
-                            });
+//                    putParams.addBodyParameter("manHourActualID", dispatchListItem.manHourActualID);
+//                    putParams.addBodyParameter("manHourActual", Double.toString(compute_manHourActual(startTime, endTime)));
+//                    putParams.addBodyParameter("completeDatetime", endTime);
+//                    putParams.addBodyParameter("remark", "");
 
-                            try {
-                                Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
-                                field.setAccessible(true);
-                                field.set(dialog, true);
-                            } catch (NoSuchFieldException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
+//                    putParams.addBodyParameter("viewModel", viewModel);
+
+                    putParams.setAsJsonContent(true);
+                    putParams.setBodyContent(viewModel);
+
+                    update_manager.request(HttpMethod.PUT, putParams, new Callback.CommonCallback<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                            Log.d("MyLog", result);
 
                         }
 
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+
+                            Log.d("MyLog", isOnCallback + "|" + ex.toString());
+
+                        }
+
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+
+                    try {
+                        Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                        field.setAccessible(true);
+                        field.set(dialog, true);
+                    } catch (NoSuchFieldException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
                     }
-                });
-                break;
 
-            case 2:
-                builder.setPositiveButton("确定",null);
-                break;
-        }
+                }
 
-
+            }
+        });
 
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
